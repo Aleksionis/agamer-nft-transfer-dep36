@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Перевод 98 Agamer NFT</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: ui-sans-serif, system-ui, sans-serif; background:#0c101c; color:#e8edf7; margin:0; padding:24px; line-height:1.45; }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.35rem; margin: 0 0 8px; }
+    .card { background:#161b2c; border:1px solid #2a3350; border-radius:14px; padding:18px 20px; margin:14px 0; }
+    .k { color:#9aa6c3; font-size:.9rem; }
+    .v { font-weight:600; word-break:break-word; }
+    #list { font-size:.92rem; color:#cdd6ea; }
+    button#send { background:#3dd68c; color:#082014; border:0; border-radius:10px; padding:12px 18px; font-weight:700; font-size:1rem; cursor:pointer; }
+    button#send:disabled { background:#3a445f; color:#8b93a7; cursor:not-allowed; }
+    #status { margin-top:12px; }
+    #status.err { color:#ff8b8b; }
+    #status.ok { color:#7dffb3; }
+    .note { color:#9aa6c3; font-size:.9rem; }
+    #connect { margin: 8px 0 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Перевод 98 Agamer NFT</h1>
+    <p class="note">Это служебная страница Unix для одного перевода. Это не сайт Getgems и не официальная страница Agamer Universe. Подключай только aleksionis.ton.</p>
+    <div class="card">
+      <div class="k">Куда</div>
+      <div class="v" id="dest">—</div>
+      <div class="k" style="margin-top:10px">Комментарий</div>
+      <div class="v" id="comment">—</div>
+      <div class="k" style="margin-top:10px">Количество</div>
+      <div class="v"><span id="count">—</span> NFT, без #1, #704 и #929</div>
+      <div class="k" style="margin-top:10px">Резерв на комиссию</div>
+      <div class="v" id="reserved">—</div>
+      <p class="note">На каждую NFT уходит 0,05 TON, как в переводе #704. Сдача вернётся на aleksionis.ton.</p>
+    </div>
+    <div id="connect"></div>
+    <button id="send" disabled>Подписать в Tonkeeper</button>
+    <div id="status"></div>
+    <div class="card">
+      <div class="k">Список</div>
+      <div id="list">загрузка…</div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/@tonconnect/ui@2/dist/tonconnect-ui.min.js"></script>
+  <script src="./app.bundle.js"></script>
+</body>
+</html>
