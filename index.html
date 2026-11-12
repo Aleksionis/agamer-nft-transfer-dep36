@@ -13,8 +13,10 @@
     .k { color:#9aa6c3; font-size:.9rem; }
     .v { font-weight:600; word-break:break-word; }
     #list { font-size:.92rem; color:#cdd6ea; }
-    button#send { background:#3dd68c; color:#082014; border:0; border-radius:10px; padding:12px 18px; font-weight:700; font-size:1rem; cursor:pointer; }
+    button#send, button#open-tk { border:0; border-radius:10px; padding:14px 18px; font-weight:700; font-size:1rem; cursor:pointer; min-height:48px; }
+    button#send { background:#3dd68c; color:#082014; }
     button#send:disabled { background:#3a445f; color:#8b93a7; cursor:not-allowed; }
+    button#open-tk { background:#2f6dff; color:#fff; margin: 8px 0 12px; display:block; width:100%; max-width:320px; }
     #status { margin-top:12px; }
     #status.err { color:#ff8b8b; }
     #status.ok { color:#7dffb3; }
@@ -38,6 +40,7 @@
       <p class="note">На каждую NFT уходит 0,05 TON, как в переводе #704. Сдача вернётся на aleksionis.ton.</p>
     </div>
     <div id="connect"></div>
+    <button type="button" id="open-tk">Открыть Tonkeeper</button>
     <button id="send" disabled>Подписать в Tonkeeper</button>
     <div id="status"></div>
     <div class="card">
@@ -62,7 +65,7 @@
       }
     })();
   </script>
-  <script src="./tonconnect-ui.min.js?v=3"></script>
-  <script src="./app.bundle.js?v=3"></script>
+  <script src="./tonconnect-ui.min.js?v=4"></script>
+  <script src="./app.bundle.js?v=4"></script>
 </body>
 </html>

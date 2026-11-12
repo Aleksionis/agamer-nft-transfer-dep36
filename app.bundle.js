@@ -23643,11 +23643,44 @@
           return;
         }
         const manifestUrl = new URL("tonconnect-manifest.json", window.location.href).href;
-        const returnUrl = new URL(".", window.location.href).href;
         const ui = new TON_CONNECT_UI.TonConnectUI({
           manifestUrl,
           buttonRootId: "connect",
-          actionsConfiguration: { twaReturnUrl: returnUrl }
+          language: "ru",
+          actionsConfiguration: { returnStrategy: "back" }
+        });
+        const openTk = document.getElementById("open-tk");
+        async function openTonkeeper() {
+          setStatus("\u041E\u0442\u043A\u0440\u044B\u0432\u0430\u044E Tonkeeper\u2026");
+          try {
+            await ui.openSingleWalletModal("tonkeeper");
+            return;
+          } catch (e) {
+            console.warn("openSingleWalletModal failed", e);
+          }
+          try {
+            const wallets = await ui.getWallets();
+            const tk = wallets.find((w) => {
+              const id = String(w.appName || "").toLowerCase();
+              const name = String(w.name || "").toLowerCase();
+              return (id === "tonkeeper" || name === "tonkeeper") && !id.includes("pro") && !name.includes("pro");
+            }) || wallets.find((w) => String(w.appName || w.name || "").toLowerCase().includes("tonkeeper"));
+            if (!tk || !tk.universalLink || !tk.bridgeUrl) {
+              throw new Error("Tonkeeper \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u043A\u043E\u0448\u0435\u043B\u044C\u043A\u043E\u0432");
+            }
+            const url = ui.connector.connect({
+              universalLink: tk.universalLink,
+              bridgeUrl: tk.bridgeUrl
+            });
+            if (!url) throw new Error("\u041D\u0435\u0442 \u0441\u0441\u044B\u043B\u043A\u0438 \u0434\u043B\u044F Tonkeeper");
+            window.location.href = url;
+          } catch (e2) {
+            setStatus("\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043A\u0440\u044B\u0442\u044C Tonkeeper: " + e2, "err");
+          }
+        }
+        if (openTk) openTk.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          openTonkeeper();
         });
         function connectedWallet() {
           return ui.account?.address || ui.wallet?.account?.address || null;
